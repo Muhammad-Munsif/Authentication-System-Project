@@ -1,43 +1,49 @@
 /* Custom styles to complement Tailwind */
 .auth-container {
-    transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .auth-form {
-    transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .auth-form.hidden {
-    display: none;
-    opacity: 0;
-    transform: translateY(20px);
+  display: none;
+  opacity: 0;
+  transform: translateY(20px);
 }
 
 .social-btn {
-    transition: transform 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
 .social-btn:hover {
-    transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 /* Responsive adjustments */
 @media (max-width: 640px) {
-    .auth-container {
-        padding: 0 1rem;
-    }
-    
-    .auth-form {
-        padding: 1.5rem;
-    }
+  .auth-container {
+    padding: 0 1rem;
+  }
+
+  .auth-form {
+    padding: 1.5rem;
+  }
 }
 
 /* Animation for success message */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 #success-message {
-    animation: fadeIn 0.5s ease forwards;
+  animation: fadeIn 0.5s ease forwards;
 }
