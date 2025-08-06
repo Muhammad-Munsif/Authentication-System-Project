@@ -90,9 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const name = document.getElementById("signup-name").value;
     const email = document.getElementById("signup-email").value;
     const password = document.getElementById("signup-password").value;
-    const confirmPassword = document.getElementById(
-      "signup-confirm-password"
-    ).value;
+    const confirmPassword = document.getElementById("signup-confirm-password").value;
     const terms = document.getElementById("terms").checked;
 
     // Validation
