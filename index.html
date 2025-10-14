@@ -45,12 +45,12 @@
         .auth-form {
           padding: 1.5rem;
         }
-        
+
         .toggle-buttons {
           flex-direction: column;
           border-radius: 0.5rem;
         }
-        
+
         .toggle-buttons button {
           border-radius: 0.5rem;
           margin: 2px 0;
@@ -72,7 +72,7 @@
       #success-message {
         animation: fadeIn 0.5s ease forwards;
       }
-      
+
       /* Error message styling */
       .error-message {
         color: #e53e3e;
@@ -80,17 +80,17 @@
         margin-top: 0.25rem;
         display: none;
       }
-      
+
       .input-error {
         border-color: #e53e3e;
       }
-      
+
       /* Loading state */
       .loading {
         opacity: 0.7;
         pointer-events: none;
       }
-      
+
       .spinner {
         border: 2px solid #f3f3f3;
         border-top: 2px solid #3498db;
@@ -101,10 +101,14 @@
         display: inline-block;
         margin-right: 8px;
       }
-      
+
       @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
       }
     </style>
   </head>
@@ -391,7 +395,7 @@
         const successMessage = document.getElementById("success-message");
         const backToAuth = document.getElementById("back-to-auth");
         const successText = document.getElementById("success-text");
-        
+
         // Submit buttons
         const loginSubmit = document.getElementById("login-submit");
         const signupSubmit = document.getElementById("signup-submit");
@@ -417,7 +421,7 @@
           loginForm.classList.remove("hidden");
           signupForm.classList.add("hidden");
           successMessage.classList.add("hidden");
-          
+
           // Clear any previous errors
           clearErrors();
         }
@@ -430,7 +434,7 @@
           signupForm.classList.remove("hidden");
           loginForm.classList.add("hidden");
           successMessage.classList.add("hidden");
-          
+
           // Clear any previous errors
           clearErrors();
         }
@@ -470,48 +474,48 @@
         function showError(inputId, message) {
           const errorElement = document.getElementById(`${inputId}-error`);
           const inputElement = document.getElementById(inputId);
-          
+
           errorElement.textContent = message;
-          errorElement.style.display = 'block';
-          inputElement.classList.add('input-error');
+          errorElement.style.display = "block";
+          inputElement.classList.add("input-error");
         }
-        
+
         function clearError(inputId) {
           const errorElement = document.getElementById(`${inputId}-error`);
           const inputElement = document.getElementById(inputId);
-          
-          errorElement.textContent = '';
-          errorElement.style.display = 'none';
-          inputElement.classList.remove('input-error');
+
+          errorElement.textContent = "";
+          errorElement.style.display = "none";
+          inputElement.classList.remove("input-error");
         }
-        
+
         function clearErrors() {
           // Clear all error messages
-          const errorElements = document.querySelectorAll('.error-message');
-          errorElements.forEach(element => {
-            element.textContent = '';
-            element.style.display = 'none';
+          const errorElements = document.querySelectorAll(".error-message");
+          errorElements.forEach((element) => {
+            element.textContent = "";
+            element.style.display = "none";
           });
-          
+
           // Remove error styling from inputs
-          const inputElements = document.querySelectorAll('input');
-          inputElements.forEach(input => {
-            input.classList.remove('input-error');
+          const inputElements = document.querySelectorAll("input");
+          inputElements.forEach((input) => {
+            input.classList.remove("input-error");
           });
         }
-        
+
         // Validation functions
         function validateEmail(email) {
           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           return emailRegex.test(email);
         }
-        
+
         function validatePassword(password) {
           // At least 8 characters with at least one number
           const passwordRegex = /^(?=.*\d).{8,}$/;
           return passwordRegex.test(password);
         }
-        
+
         function validateName(name) {
           return name.trim().length >= 2;
         }
@@ -519,52 +523,52 @@
         // Form submission handling
         loginForm.addEventListener("submit", function (e) {
           e.preventDefault();
-          
+
           // Clear previous errors
           clearErrors();
-          
+
           const email = document.getElementById("login-email").value.trim();
           const password = document.getElementById("login-password").value;
 
           // Validation
           let isValid = true;
-          
+
           if (!email) {
-            showError('login-email', 'Email is required');
+            showError("login-email", "Email is required");
             isValid = false;
           } else if (!validateEmail(email)) {
-            showError('login-email', 'Please enter a valid email address');
+            showError("login-email", "Please enter a valid email address");
             isValid = false;
           }
-          
+
           if (!password) {
-            showError('login-password', 'Password is required');
+            showError("login-password", "Password is required");
             isValid = false;
           }
-          
+
           if (!isValid) return;
-          
+
           // Show loading state
-          loginSubmit.classList.add('loading');
+          loginSubmit.classList.add("loading");
           loginText.innerHTML = '<div class="spinner"></div> Logging in...';
-          
+
           // Here you would typically make an API call to your backend
           // For demo purposes, we'll simulate a successful login after a delay
           setTimeout(() => {
             simulateAuth("login", email);
-            
+
             // Reset loading state
-            loginSubmit.classList.remove('loading');
-            loginText.textContent = 'Login';
+            loginSubmit.classList.remove("loading");
+            loginText.textContent = "Login";
           }, 1500);
         });
 
         signupForm.addEventListener("submit", function (e) {
           e.preventDefault();
-          
+
           // Clear previous errors
           clearErrors();
-          
+
           const name = document.getElementById("signup-name").value.trim();
           const email = document.getElementById("signup-email").value.trim();
           const password = document.getElementById("signup-password").value;
@@ -575,58 +579,65 @@
 
           // Validation
           let isValid = true;
-          
+
           if (!name) {
-            showError('signup-name', 'Full name is required');
+            showError("signup-name", "Full name is required");
             isValid = false;
           } else if (!validateName(name)) {
-            showError('signup-name', 'Name must be at least 2 characters long');
+            showError("signup-name", "Name must be at least 2 characters long");
             isValid = false;
           }
-          
+
           if (!email) {
-            showError('signup-email', 'Email is required');
+            showError("signup-email", "Email is required");
             isValid = false;
           } else if (!validateEmail(email)) {
-            showError('signup-email', 'Please enter a valid email address');
+            showError("signup-email", "Please enter a valid email address");
             isValid = false;
           }
-          
+
           if (!password) {
-            showError('signup-password', 'Password is required');
+            showError("signup-password", "Password is required");
             isValid = false;
           } else if (!validatePassword(password)) {
-            showError('signup-password', 'Password must be at least 8 characters with at least one number');
+            showError(
+              "signup-password",
+              "Password must be at least 8 characters with at least one number"
+            );
             isValid = false;
           }
-          
+
           if (!confirmPassword) {
-            showError('signup-confirm-password', 'Please confirm your password');
+            showError(
+              "signup-confirm-password",
+              "Please confirm your password"
+            );
             isValid = false;
           } else if (password !== confirmPassword) {
-            showError('signup-confirm-password', 'Passwords do not match');
+            showError("signup-confirm-password", "Passwords do not match");
             isValid = false;
           }
-          
+
           if (!terms) {
-            showError('terms', 'You must agree to the terms and conditions');
+            showError("terms", "You must agree to the terms and conditions");
             isValid = false;
           }
-          
+
           if (!isValid) return;
-          
+
           // Show loading state
-          signupSubmit.classList.add('loading');
-          signupText.innerHTML = '<div class="spinner"></div> Creating account...';
-          
+          signupSubmit.classList.add("loading");
+          signupText.innerHTML =
+            '<div class="spinner"></div> Creating account...';
+
           // Here you would typically make an API call to your backend
           // For demo purposes, we'll simulate a successful signup after a delay
           setTimeout(() => {
             simulateAuth("signup", email);
-            
+
             // Reset loading state
-            signupSubmit.classList.remove('loading');
-            signupText.textContent = 'Sign Up';
+            signupSubmit.classList.remove("loading");
+            signupText.textContent = "Sign Up";
           }, 1500);
         });
 
@@ -663,42 +674,53 @@
         });
 
         // Real-time validation for better UX
-        document.getElementById('login-email').addEventListener('blur', function() {
-          const email = this.value.trim();
-          if (email && !validateEmail(email)) {
-            showError('login-email', 'Please enter a valid email address');
-          } else {
-            clearError('login-email');
-          }
-        });
-        
-        document.getElementById('signup-email').addEventListener('blur', function() {
-          const email = this.value.trim();
-          if (email && !validateEmail(email)) {
-            showError('signup-email', 'Please enter a valid email address');
-          } else {
-            clearError('signup-email');
-          }
-        });
-        
-        document.getElementById('signup-password').addEventListener('blur', function() {
-          const password = this.value;
-          if (password && !validatePassword(password)) {
-            showError('signup-password', 'Password must be at least 8 characters with at least one number');
-          } else {
-            clearError('signup-password');
-          }
-        });
-        
-        document.getElementById('signup-confirm-password').addEventListener('blur', function() {
-          const password = document.getElementById('signup-password').value;
-          const confirmPassword = this.value;
-          if (password && confirmPassword && password !== confirmPassword) {
-            showError('signup-confirm-password', 'Passwords do not match');
-          } else {
-            clearError('signup-confirm-password');
-          }
-        });
+        document
+          .getElementById("login-email")
+          .addEventListener("blur", function () {
+            const email = this.value.trim();
+            if (email && !validateEmail(email)) {
+              showError("login-email", "Please enter a valid email address");
+            } else {
+              clearError("login-email");
+            }
+          });
+
+        document
+          .getElementById("signup-email")
+          .addEventListener("blur", function () {
+            const email = this.value.trim();
+            if (email && !validateEmail(email)) {
+              showError("signup-email", "Please enter a valid email address");
+            } else {
+              clearError("signup-email");
+            }
+          });
+
+        document
+          .getElementById("signup-password")
+          .addEventListener("blur", function () {
+            const password = this.value;
+            if (password && !validatePassword(password)) {
+              showError(
+                "signup-password",
+                "Password must be at least 8 characters with at least one number"
+              );
+            } else {
+              clearError("signup-password");
+            }
+          });
+
+        document
+          .getElementById("signup-confirm-password")
+          .addEventListener("blur", function () {
+            const password = document.getElementById("signup-password").value;
+            const confirmPassword = this.value;
+            if (password && confirmPassword && password !== confirmPassword) {
+              showError("signup-confirm-password", "Passwords do not match");
+            } else {
+              clearError("signup-confirm-password");
+            }
+          });
 
         // Initialize with login form shown
         showLogin();
