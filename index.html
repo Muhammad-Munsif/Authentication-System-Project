@@ -1,392 +1,289 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Auth System | Login/Signup</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-   <link rel="stylesheet" href="css/style.css">
-   <style>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auth System | Login/Signup</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css">
+  <style>
     /* Custom styles to complement Tailwind */
-.auth-container {
-  transition: all 0.3s ease;
-}
+    .auth-container {
+      transition: all 0.3s ease;
+    }
 
-.auth-form {
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
+    .auth-form {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
 
-.auth-form.hidden {
-  display: none;
-  opacity: 0;
-  transform: translateY(20px);
-}
+    .auth-form.hidden {
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+    }
 
-.social-btn {
-  transition: transform 0.2s ease;
-}
+    .social-btn {
+      transition: transform 0.2s ease;
+    }
 
-.social-btn:hover {
-  transform: translateY(-2px);
-}
+    .social-btn:hover {
+      transform: translateY(-2px);
+    }
 
-/* Responsive adjustments */
-@media (max-width: 640px) {
-  .auth-container {
-    padding: 0 1rem;
-  }
+    /* Responsive adjustments */
+    @media (max-width: 640px) {
+      .auth-container {
+        padding: 0 1rem;
+      }
 
-  .auth-form {
-    padding: 1.5rem;
-  }
+      .auth-form {
+        padding: 1.5rem;
+      }
 
-  .toggle-buttons {
-    flex-direction: column;
-    border-radius: 0.5rem;
-  }
+      .toggle-buttons {
+        flex-direction: column;
+        border-radius: 0.5rem;
+      }
 
-  .toggle-buttons button {
-    border-radius: 0.5rem;
-    margin: 2px 0;
-  }
-}
+      .toggle-buttons button {
+        border-radius: 0.5rem;
+        margin: 2px 0;
+      }
+    }
 
-/* Animation for success message */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+    /* Animation for success message */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
 
-#success-message {
-  animation: fadeIn 0.5s ease forwards;
-}
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-/* Error message styling */
-.error-message {
-  color: #e53e3e;
-  font-size: 0.875rem;
-  margin-top: 0.25rem;
-  display: none;
-}
+    #success-message {
+      animation: fadeIn 0.5s ease forwards;
+    }
 
-.input-error {
-  border-color: #e53e3e;
-}
+    /* Error message styling */
+    .error-message {
+      color: #e53e3e;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+      display: none;
+    }
 
-/* Loading state */
-.loading {
-  opacity: 0.7;
-  pointer-events: none;
-}
+    .input-error {
+      border-color: #e53e3e;
+    }
 
-.spinner {
-  border: 2px solid #f3f3f3;
-  border-top: 2px solid #3498db;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  animation: spin 1s linear infinite;
-  display: inline-block;
-  margin-right: 8px;
-}
+    /* Loading state */
+    .loading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
+    .spinner {
+      border: 2px solid #f3f3f3;
+      border-top: 2px solid #3498db;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      margin-right: 8px;
+    }
 
-   </style>
-  </head>
-  <body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
-    <div class="auth-container w-full max-w-md">
-      <!-- Toggle between Login/Signup -->
-      <div class="toggle-buttons flex mb-8 bg-white rounded-full p-1 shadow-md">
-        <button
-          id="login-tab"
-          class="flex-1 py-2 px-4 rounded-full font-medium text-white bg-blue-600 focus:outline-none transition-all"
-        >
-          Login
-        </button>
-        <button
-          id="signup-tab"
-          class="flex-1 py-2 px-4 rounded-full font-medium text-gray-700 focus:outline-none transition-all"
-        >
-          Sign Up
-        </button>
-      </div>
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
 
-      <!-- Login Form -->
-      <form id="login-form" class="auth-form bg-white p-8 rounded-lg shadow-md">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
-          Welcome Back
-        </h2>
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
 
-        <div class="mb-4">
-          <label
-            for="login-email"
-            class="block text-gray-700 text-sm font-medium mb-2"
-            >Email</label
-          >
-          <div class="relative">
-            <input
-              type="email"
-              id="login-email"
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="your@email.com"
-              required
-            />
-            <i class="fas fa-envelope absolute right-3 top-3 text-gray-400"></i>
-          </div>
-          <div id="login-email-error" class="error-message"></div>
-        </div>
-
-        <div class="mb-6">
-          <label
-            for="login-password"
-            class="block text-gray-700 text-sm font-medium mb-2"
-            >Password</label
-          >
-          <div class="relative">
-            <input
-              type="password"
-              id="login-password"
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="••••••••"
-              required
-            />
-            <i class="fas fa-lock absolute right-3 top-3 text-gray-400"></i>
-            <button
-              type="button"
-              class="absolute right-10 top-3 text-gray-400 hover:text-gray-600"
-              id="toggle-login-password"
-            >
-              <i class="fas fa-eye"></i>
-            </button>
-          </div>
-          <div id="login-password-error" class="error-message"></div>
-          <div class="text-right mt-2">
-            <a href="#" class="text-sm text-blue-600 hover:underline"
-              >Forgot password?</a
-            >
-          </div>
-        </div>
-
-        <button
-          type="submit"
-          id="login-submit"
-          class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex justify-center items-center"
-        >
-          <span id="login-text">Login</span>
-        </button>
-
-        <div class="mt-6 text-center">
-          <p class="text-gray-600">Or login with</p>
-          <div class="flex justify-center space-x-4 mt-3">
-            <button
-              type="button"
-              class="social-btn bg-red-600 text-white p-2 rounded-full hover:bg-red-700"
-            >
-              <i class="fab fa-google"></i>
-            </button>
-            <button
-              type="button"
-              class="social-btn bg-blue-800 text-white p-2 rounded-full hover:bg-blue-900"
-            >
-              <i class="fab fa-facebook-f"></i>
-            </button>
-            <button
-              type="button"
-              class="social-btn bg-black text-white p-2 rounded-full hover:bg-gray-800"
-            >
-              <i class="fab fa-apple"></i>
-            </button>
-          </div>
-        </div>
-      </form>
-
-      <!-- Signup Form -->
-      <form
-        id="signup-form"
-        class="auth-form bg-white p-8 rounded-lg shadow-md hidden"
-      >
-        <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
-          Create Account
-        </h2>
-
-        <div class="mb-4">
-          <label
-            for="signup-name"
-            class="block text-gray-700 text-sm font-medium mb-2"
-            >Full Name</label
-          >
-          <div class="relative">
-            <input
-              type="text"
-              id="signup-name"
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="John Doe"
-              required
-            />
-            <i class="fas fa-user absolute right-3 top-3 text-gray-400"></i>
-          </div>
-          <div id="signup-name-error" class="error-message"></div>
-        </div>
-
-        <div class="mb-4">
-          <label
-            for="signup-email"
-            class="block text-gray-700 text-sm font-medium mb-2"
-            >Email</label
-          >
-          <div class="relative">
-            <input
-              type="email"
-              id="signup-email"
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="your@email.com"
-              required
-            />
-            <i class="fas fa-envelope absolute right-3 top-3 text-gray-400"></i>
-          </div>
-          <div id="signup-email-error" class="error-message"></div>
-        </div>
-
-        <div class="mb-4">
-          <label
-            for="signup-password"
-            class="block text-gray-700 text-sm font-medium mb-2"
-            >Password</label
-          >
-          <div class="relative">
-            <input
-              type="password"
-              id="signup-password"
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="••••••••"
-              required
-            />
-            <i class="fas fa-lock absolute right-3 top-3 text-gray-400"></i>
-            <button
-              type="button"
-              class="absolute right-10 top-3 text-gray-400 hover:text-gray-600"
-              id="toggle-signup-password"
-            >
-              <i class="fas fa-eye"></i>
-            </button>
-          </div>
-          <div id="signup-password-error" class="error-message"></div>
-          <div class="text-xs text-gray-500 mt-1">
-            Minimum 8 characters with at least one number
-          </div>
-        </div>
-
-        <div class="mb-6">
-          <label
-            for="signup-confirm-password"
-            class="block text-gray-700 text-sm font-medium mb-2"
-            >Confirm Password</label
-          >
-          <div class="relative">
-            <input
-              type="password"
-              id="signup-confirm-password"
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="••••••••"
-              required
-            />
-            <i class="fas fa-lock absolute right-3 top-3 text-gray-400"></i>
-          </div>
-          <div id="signup-confirm-password-error" class="error-message"></div>
-        </div>
-
-        <div class="mb-6 flex items-center">
-          <input
-            type="checkbox"
-            id="terms"
-            class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
-          />
-          <label for="terms" class="ml-2 text-sm text-gray-700"
-            >I agree to the
-            <a href="#" class="text-blue-600 hover:underline">Terms</a> and
-            <a href="#" class="text-blue-600 hover:underline"
-              >Privacy Policy</a
-            ></label
-          >
-        </div>
-        <div id="terms-error" class="error-message mb-4"></div>
-
-        <button
-          type="submit"
-          id="signup-submit"
-          class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex justify-center items-center"
-        >
-          <span id="signup-text">Sign Up</span>
-        </button>
-
-        <div class="mt-6 text-center">
-          <p class="text-gray-600">Or sign up with</p>
-          <div class="flex justify-center space-x-4 mt-3">
-            <button
-              type="button"
-              class="social-btn bg-red-600 text-white p-2 rounded-full hover:bg-red-700"
-            >
-              <i class="fab fa-google"></i>
-            </button>
-            <button
-              type="button"
-              class="social-btn bg-blue-800 text-white p-2 rounded-full hover:bg-blue-900"
-            >
-              <i class="fab fa-facebook-f"></i>
-            </button>
-            <button
-              type="button"
-              class="social-btn bg-black text-white p-2 rounded-full hover:bg-gray-800"
-            >
-              <i class="fab fa-apple"></i>
-            </button>
-          </div>
-        </div>
-      </form>
-
-      <!-- Success Message (hidden by default) -->
-      <div
-        id="success-message"
-        class="bg-white p-8 rounded-lg shadow-md text-center hidden"
-      >
-        <div
-          class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
-        >
-          <i class="fas fa-check text-green-600 text-2xl"></i>
-        </div>
-        <h2 class="text-2xl font-bold text-gray-800 mb-2">Success!</h2>
-        <p class="text-gray-600 mb-6" id="success-text">
-          You have successfully logged in.
-        </p>
-        <button
-          id="back-to-auth"
-          class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-        >
-          Back to Authentication
-        </button>
-      </div>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+  <div class="auth-container w-full max-w-md">
+    <!-- Toggle between Login/Signup -->
+    <div class="toggle-buttons flex mb-8 bg-white rounded-full p-1 shadow-md">
+      <button id="login-tab"
+        class="flex-1 py-2 px-4 rounded-full font-medium text-white bg-blue-600 focus:outline-none transition-all">
+        Login
+      </button>
+      <button id="signup-tab"
+        class="flex-1 py-2 px-4 rounded-full font-medium text-gray-700 focus:outline-none transition-all">
+        Sign Up
+      </button>
     </div>
-   <script src="js/sctipt.js"></script>
-  </body>
+
+    <!-- Login Form -->
+    <form id="login-form" class="auth-form bg-white p-8 rounded-lg shadow-md">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+        Welcome Back
+      </h2>
+
+      <div class="mb-4">
+        <label for="login-email" class="block text-gray-700 text-sm font-medium mb-2">Email</label>
+        <div class="relative">
+          <input type="email" id="login-email"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="your@email.com" required />
+          <i class="fas fa-envelope absolute right-3 top-3 text-gray-400"></i>
+        </div>
+        <div id="login-email-error" class="error-message"></div>
+      </div>
+
+      <div class="mb-6">
+        <label for="login-password" class="block text-gray-700 text-sm font-medium mb-2">Password</label>
+        <div class="relative">
+          <input type="password" id="login-password"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="••••••••" required />
+          <i class="fas fa-lock absolute right-3 top-3 text-gray-400"></i>
+          <button type="button" class="absolute right-10 top-3 text-gray-400 hover:text-gray-600"
+            id="toggle-login-password">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+        <div id="login-password-error" class="error-message"></div>
+        <div class="text-right mt-2">
+          <a href="#" class="text-sm text-blue-600 hover:underline">Forgot password?</a>
+        </div>
+      </div>
+
+      <button type="submit" id="login-submit"
+        class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex justify-center items-center">
+        <span id="login-text">Login</span>
+      </button>
+
+      <div class="mt-6 text-center">
+        <p class="text-gray-600">Or login with</p>
+        <div class="flex justify-center space-x-4 mt-3">
+          <button type="button" class="social-btn bg-red-600 text-white p-2 rounded-full hover:bg-red-700">
+            <i class="fab fa-google"></i>
+          </button>
+          <button type="button" class="social-btn bg-blue-800 text-white p-2 rounded-full hover:bg-blue-900">
+            <i class="fab fa-facebook-f"></i>
+          </button>
+          <button type="button" class="social-btn bg-black text-white p-2 rounded-full hover:bg-gray-800">
+            <i class="fab fa-apple"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Signup Form -->
+    <form id="signup-form" class="auth-form bg-white p-8 rounded-lg shadow-md hidden">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+        Create Account
+      </h2>
+
+      <div class="mb-4">
+        <label for="signup-name" class="block text-gray-700 text-sm font-medium mb-2">Full Name</label>
+        <div class="relative">
+          <input type="text" id="signup-name"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="John Doe" required />
+          <i class="fas fa-user absolute right-3 top-3 text-gray-400"></i>
+        </div>
+        <div id="signup-name-error" class="error-message"></div>
+      </div>
+
+      <div class="mb-4">
+        <label for="signup-email" class="block text-gray-700 text-sm font-medium mb-2">Email</label>
+        <div class="relative">
+          <input type="email" id="signup-email"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="your@email.com" required />
+          <i class="fas fa-envelope absolute right-3 top-3 text-gray-400"></i>
+        </div>
+        <div id="signup-email-error" class="error-message"></div>
+      </div>
+
+      <div class="mb-4">
+        <label for="signup-password" class="block text-gray-700 text-sm font-medium mb-2">Password</label>
+        <div class="relative">
+          <input type="password" id="signup-password"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="••••••••" required />
+          <i class="fas fa-lock absolute right-3 top-3 text-gray-400"></i>
+          <button type="button" class="absolute right-10 top-3 text-gray-400 hover:text-gray-600"
+            id="toggle-signup-password">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+        <div id="signup-password-error" class="error-message"></div>
+        <div class="text-xs text-gray-500 mt-1">
+          Minimum 8 characters with at least one number
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <label for="signup-confirm-password" class="block text-gray-700 text-sm font-medium mb-2">Confirm
+          Password</label>
+        <div class="relative">
+          <input type="password" id="signup-confirm-password"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="••••••••" required />
+          <i class="fas fa-lock absolute right-3 top-3 text-gray-400"></i>
+        </div>
+        <div id="signup-confirm-password-error" class="error-message"></div>
+      </div>
+
+      <div class="mb-6 flex items-center">
+        <input type="checkbox" id="terms" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" />
+        <label for="terms" class="ml-2 text-sm text-gray-700">I agree to the
+          <a href="#" class="text-blue-600 hover:underline">Terms</a> and
+          <a href="#" class="text-blue-600 hover:underline">Privacy Policy</a></label>
+      </div>
+      <div id="terms-error" class="error-message mb-4"></div>
+
+      <button type="submit" id="signup-submit"
+        class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex justify-center items-center">
+        <span id="signup-text">Sign Up</span>
+      </button>
+
+      <div class="mt-6 text-center">
+        <p class="text-gray-600">Or sign up with</p>
+        <div class="flex justify-center space-x-4 mt-3">
+          <button type="button" class="social-btn bg-red-600 text-white p-2 rounded-full hover:bg-red-700">
+            <i class="fab fa-google"></i>
+          </button>
+          <button type="button" class="social-btn bg-blue-800 text-white p-2 rounded-full hover:bg-blue-900">
+            <i class="fab fa-facebook-f"></i>
+          </button>
+          <button type="button" class="social-btn bg-black text-white p-2 rounded-full hover:bg-gray-800">
+            <i class="fab fa-apple"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Success Message (hidden by default) -->
+    <div id="success-message" class="bg-white p-8 rounded-lg shadow-md text-center hidden">
+      <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <i class="fas fa-check text-green-600 text-2xl"></i>
+      </div>
+      <h2 class="text-2xl font-bold text-gray-800 mb-2">Success!</h2>
+      <p class="text-gray-600 mb-6" id="success-text">
+        You have successfully logged in.
+      </p>
+      <button id="back-to-auth"
+        class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+        Back to Authentication
+      </button>
+    </div>
+  </div>
+  <script src="js/sctipt.js"></script>
+</body>
+
 </html>
