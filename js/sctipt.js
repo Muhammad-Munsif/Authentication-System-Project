@@ -1,4 +1,4 @@
-  <script>
+  
     document.addEventListener("DOMContentLoaded", function () {
       // DOM Elements
       const loginTab = document.getElementById("login-tab");
@@ -240,4 +240,4 @@
         }
       });
     });
-  </script>
+  
