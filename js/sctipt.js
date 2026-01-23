@@ -1,4 +1,4 @@
-<script>
+
     document.addEventListener("DOMContentLoaded", function () {
       // Theme Toggle Functionality
       const themeToggle = document.getElementById('theme-toggle');
@@ -356,4 +356,4 @@
       document.getElementById('signup-confirm-password').value = 'password123';
       document.getElementById('terms').checked = true;
     });
-  </script>
+  
