@@ -26,46 +26,46 @@
       --gray: #64748b;
       --gray-light: #94a3b8;
       --gray-lighter: #e2e8f0;
-      
+
       /* Shadows */
       --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
       --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.12);
       --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.15);
       --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.2);
       --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-      
+
       /* Border Radius */
       --radius-sm: 8px;
       --radius-md: 16px;
       --radius-lg: 24px;
       --radius-xl: 32px;
       --radius-full: 9999px;
-      
+
       /* Transitions */
       --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      
+
       /* Glass Effect */
       --glass-bg: rgba(255, 255, 255, 0.85);
       --glass-border: rgba(255, 255, 255, 0.2);
       --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      
+
       /* Backgrounds */
       --bg-gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
       --bg-gradient-light: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary) 100%);
       --bg-gradient-dark: linear-gradient(135deg, var(--primary-dark) 0%, #7c3aed 100%);
-      
+
       /* Text */
       --text-primary: var(--dark);
       --text-secondary: var(--gray);
       --text-on-primary: white;
-      
+
       /* Backgrounds */
       --bg-primary: white;
       --bg-secondary: var(--light);
       --bg-card: white;
-      
+
       /* Spacing */
       --space-xs: 0.5rem;
       --space-sm: 1rem;
@@ -79,7 +79,7 @@
     [data-theme="dark"] {
       --bg-gradient: linear-gradient(135deg, #4338ca 0%, #7c3aed 100%);
       --bg-gradient-light: linear-gradient(135deg, #4f46e5 0%, #8b5cf6 100%);
-      
+
       --light: #0f172a;
       --light-2: #1e293b;
       --dark: #f1f5f9;
@@ -87,14 +87,14 @@
       --gray: #94a3b8;
       --gray-light: #64748b;
       --gray-lighter: #334155;
-      
+
       --text-primary: var(--dark);
       --text-secondary: var(--gray);
-      
+
       --bg-primary: #0f172a;
       --bg-secondary: #1e293b;
       --bg-card: #1e293b;
-      
+
       --glass-bg: rgba(30, 41, 59, 0.85);
       --glass-border: rgba(255, 255, 255, 0.1);
       --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -167,12 +167,16 @@
     }
 
     @keyframes float {
-      0%, 100% {
+
+      0%,
+      100% {
         transform: translateY(0) rotate(0deg);
       }
+
       33% {
         transform: translateY(-30px) rotate(120deg);
       }
+
       66% {
         transform: translateY(30px) rotate(240deg);
       }
@@ -221,6 +225,7 @@
         opacity: 0;
         transform: translateY(40px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -269,6 +274,7 @@
       from {
         transform: translateY(0);
       }
+
       to {
         transform: translateY(60px);
       }
@@ -399,6 +405,7 @@
         opacity: 0;
         transform: translateY(20px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -534,9 +541,19 @@
     }
 
     @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      75% { transform: translateX(5px); }
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      25% {
+        transform: translateX(-5px);
+      }
+
+      75% {
+        transform: translateX(5px);
+      }
     }
 
     .form-input.error {
@@ -545,9 +562,19 @@
     }
 
     @keyframes errorShake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-8px); }
-      75% { transform: translateX(8px); }
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      25% {
+        transform: translateX(-8px);
+      }
+
+      75% {
+        transform: translateX(8px);
+      }
     }
 
     /* Checkbox */
@@ -805,16 +832,20 @@
       from {
         transform: scale(0);
       }
+
       to {
         transform: scale(1);
       }
     }
 
     @keyframes pulse {
-      0%, 100% {
+
+      0%,
+      100% {
         transform: scale(1);
         opacity: 1;
       }
+
       50% {
         transform: scale(1.1);
         opacity: 0.7;
@@ -917,12 +948,12 @@
       .shape {
         display: none;
       }
-      
+
       .theme-toggle {
         top: var(--space-sm);
         right: var(--space-sm);
       }
-      
+
       .theme-toggle-btn {
         width: 44px;
         height: 44px;
@@ -970,16 +1001,16 @@
       .form-input {
         padding: 16px 16px 16px 48px;
       }
-      
+
       .success-icon {
         width: 80px;
         height: 80px;
       }
-      
+
       .success-icon i {
         font-size: 2.5rem;
       }
-      
+
       .success-title {
         font-size: 1.75rem;
       }
@@ -990,7 +1021,7 @@
       .auth-container {
         max-width: 480px;
       }
-      
+
       .social-buttons {
         grid-template-columns: repeat(3, 1fr);
       }
@@ -1001,7 +1032,7 @@
       .auth-container {
         max-width: 540px;
       }
-      
+
       .auth-card {
         margin: var(--space-md);
       }
@@ -1013,7 +1044,7 @@
         box-shadow: none;
         border: 1px solid #ddd;
       }
-      
+
       .theme-toggle,
       .background-shapes,
       .social-buttons {
@@ -1023,6 +1054,7 @@
 
     /* Accessibility */
     @media (prefers-reduced-motion: reduce) {
+
       *,
       *::before,
       *::after {
@@ -1282,7 +1314,7 @@
     </div>
   </div>
 
-  
+
 </body>
 
 </html>
