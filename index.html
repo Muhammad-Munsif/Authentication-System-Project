@@ -1011,6 +1011,7 @@
         opacity: 0;
         transform: translateX(20px);
       }
+
       to {
         opacity: 1;
         transform: translateX(0);
@@ -1033,7 +1034,7 @@
       right: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
       animation: rotate 20s linear infinite;
     }
 
@@ -1041,6 +1042,7 @@
       from {
         transform: rotate(0deg);
       }
+
       to {
         transform: rotate(360deg);
       }
@@ -1988,12 +1990,12 @@
           const firstName = userData.firstName || "John";
           const lastName = userData.lastName || "Doe";
           const email = userData.email || "john.doe@example.com";
-          
+
           // Set avatar initials
           userAvatar.textContent = (firstName[0] + lastName[0]).toUpperCase();
           userName.textContent = `${firstName} ${lastName}`;
           userEmail.innerHTML = `<i class="fas fa-envelope"></i> ${email}`;
-          
+
           // Update stats based on user data or use defaults
           document.getElementById("stat-projects").textContent = userData.projects || "12";
           document.getElementById("stat-tasks").textContent = userData.tasks || "48";
@@ -2005,33 +2007,33 @@
         signupForm.classList.remove("active");
         successMessage.classList.remove("active");
         dashboard.classList.add("active");
-        
+
         // Hide tabs when dashboard is shown
         document.querySelector(".auth-tabs").style.display = "none";
       }
 
       loginTab.addEventListener("click", showLogin);
       signupTab.addEventListener("click", showSignup);
-      
-      backToAuth.addEventListener("click", function() {
+
+      backToAuth.addEventListener("click", function () {
         showLogin();
         document.querySelector(".auth-tabs").style.display = "flex";
       });
 
       // Logout functionality
-      logoutBtn.addEventListener("click", function() {
+      logoutBtn.addEventListener("click", function () {
         // Show logout animation
         this.style.transform = "scale(0.95)";
         setTimeout(() => {
           this.style.transform = "scale(1)";
           showLogin();
           document.querySelector(".auth-tabs").style.display = "flex";
-          
+
           // Show logout message
           successTitle.textContent = "Logged Out!";
           successText.textContent = "You have been successfully logged out.";
           successMessage.classList.add("active");
-          
+
           // Hide success message after 3 seconds
           setTimeout(() => {
             successMessage.classList.remove("active");
@@ -2154,7 +2156,7 @@
             formData.lastName = document.getElementById("signup-last-name").value;
             formData.email = document.getElementById("signup-email").value;
           }
-          
+
           successCallback(formData);
 
           // Reset button
@@ -2411,15 +2413,15 @@
       }
 
       // Dashboard buttons
-      document.getElementById("profile-btn").addEventListener("click", function() {
+      document.getElementById("profile-btn").addEventListener("click", function () {
         alert("Profile page would open here. This is a demo.");
       });
 
-      document.getElementById("settings-btn").addEventListener("click", function() {
+      document.getElementById("settings-btn").addEventListener("click", function () {
         alert("Settings page would open here. This is a demo.");
       });
 
-      document.getElementById("new-project-btn").addEventListener("click", function() {
+      document.getElementById("new-project-btn").addEventListener("click", function () {
         alert("New project creation form would open here. This is a demo.");
       });
 
