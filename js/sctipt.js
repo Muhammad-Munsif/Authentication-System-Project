@@ -1,4 +1,4 @@
-  <script>
+  
     document.addEventListener("DOMContentLoaded", function () {
       // Theme Toggle Functionality
       const themeToggle = document.getElementById("theme-toggle");
@@ -636,4 +636,4 @@
       // Initialize demo values
       initDemoValues();
     });
-  </script>
+  
