@@ -1,4 +1,4 @@
-<script src="js/sctipt.js">
+
 
     document.addEventListener("DOMContentLoaded", function () {
       // Theme Toggle Functionality
@@ -638,4 +638,3 @@
       initDemoValues();
     });
 
-  </script>
