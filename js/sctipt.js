@@ -1,4 +1,4 @@
- <script>
+
     // Projects Data
     const projectsData = [
       {
@@ -614,4 +614,3 @@
 
       initDemoValues();
     });
-  </script>
