@@ -1,4 +1,4 @@
-<style>
+
     /* Base Styles & CSS Variables */
     :root {
       /* Light Mode Variables */
@@ -456,35 +456,12 @@
       transition: width 0.3s;
     }
 
-    /* Rest of your existing styles remain the same */
-    .background-shapes,
-    .theme-toggle,
-    .auth-container,
-    .auth-card,
-    .auth-header,
-    .logo,
-    .logo-icon,
-    .logo-text,
-    .tagline,
-    .auth-tabs,
-    .tab,
-    .auth-content,
-    .auth-form,
-    .form-title,
-    .form-group,
-    .input-wrapper,
-    .form-input,
-    .submit-btn,
-    .dashboard,
-    .dashboard-header,
-    .dashboard-content,
-    .stats-grid,
-    .stat-card,
-    .activity-list,
-    .quick-actions,
-    .action-btn {
-      /* Keep existing styles */
-    }
+ 
+
+
+
+
+    
 
     /* Add responsive styles */
     @media (max-width: 768px) {
@@ -497,4 +474,3 @@
         margin: var(--space-md);
       }
     }
-  </style>
